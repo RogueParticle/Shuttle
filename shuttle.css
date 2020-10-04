@@ -1,0 +1,43 @@
+table {
+  margin-bottom: 1em;
+  width: 75%;
+}
+
+th {
+  text-align: center;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  width: 50%;
+}
+
+.number {
+  text-align: right;
+}
+
+#gridCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid black;
+  z-index: 0;
+}
+
+#shuttleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#console {
+  position:absolute;
+  top:0px;
+  left:1000px;
+  background-color: white;
+}

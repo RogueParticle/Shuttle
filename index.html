@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="shuttle.js" type="text/javascript"></script>
+		<script src="grid.js" typd="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="shuttle.css">
+	</head>
+	<body>
+		<div id="shuttle">
+			<canvas id="shuttleCanvas" width="800" height="800"></canvas>
+		</div>
+		<div id="grid">
+			<canvas id="gridCanvas" width="800" height="800"></canvas>
+		</div>
+		<div id="console">
+			<table>
+				<tr>
+					<th>Vector</th>
+					<th>x</th>
+					<th>y</th>
+					<th>Distance</th>
+					<th>Speed</th>
+					<th>Direction<th>
+				</tr>
+				<tr>
+					<td>Position</td>
+					<td class="number" name="px" id="px">0</td>
+					<td class="number" name="py" id="py">0</td>
+					<td class="number" name="plength" id="plength">0</td>
+					<td class="number" name="pspeed" id="pspeed">0</td>
+					<td class="number" name="pangle" id="pangle">0</td>
+				</tr>
+				<tr>
+					<td>Velocity</td>
+					<td class="number" name="vx" id="vx">0</td>
+					<td class="number" name="vy" id="vy">0</td>
+					<td class="number" name="vlength" id="vlength">0</td>
+					<td class="number" name="vspeed" id="vspeed">0</td>
+					<td class="number" name="vangle" id="vangle">0</td>
+				</tr>
+				<tr>
+					<td>Acceloration</td>
+					<td class="number" name="ax" id="ax">0</td>
+					<td class="number" name="ay" id="ay">0</td>
+					<td class="number" name="alength" id="alength">0</td>
+					<td class="number" name="aspeed" id="aspeed">0</td>
+					<td class="number" name="aangle" id="aangle">0</td>
+				</tr>
+				<tr>
+					<td>Attitude</td>
+					<td class="number" name="a2x" id="a2x">0</td>
+					<td class="number" name="a2y" id="a2y">0</td>
+					<td class="number" name="a2length" id="a2length">0</td>
+					<td class="number" name="a2speed" id="a2speed">0</td>
+					<td class="number" name="a2angle" id="a2angle">0</td>
+				</tr>
+			</table>
+		</div>
+		<script src="keyboard.js" type="text/javascript"></script>
+		<script src="vector.js" type="text/javascript"></script>
+		<script src="main.js" type="text/javascript"></script>
+	</body>
+</html>
