@@ -37,8 +37,12 @@ function Shuttle( ) {
   this.height = 10; //length of rocket in pixels along x axis at 0 degrees
   this.width = 20; //width of rocket in pixels along y axis at 0 degrees
   this.noseExtension = this.width / 2;
-  this.fillColor = 'grey';
+  this.noseColor = 'white';
+  this.bodyColor = 'grey';
+  this.coneColor = 'green';
   this.borderColor = 'black';
+  this.thrusterColor1 = "red";
+  this.thrusterColor2 = "yellow";
 
   this.drawThruster = false;
   this.thrusterLength = 20;
@@ -105,20 +109,10 @@ function Shuttle( ) {
     //draw rectangle
     this.topX = this.position.getX() - this.height / 2;
     this.topY = this.position.getY() - this.width / 2;
-    this.ctx.fillStyle = this.fillColor;
+    this.ctx.fillStyle = this.bodyColor;
     this.ctx.fillRect(this.topX, this.topY, this.height, this.width);
     this.ctx.strokeStyle = this.borderColor;
     this.ctx.strokeRect(this.topX, this.topY, this.height, this.width);
-
-    //draw nose
-    /*
-    this.noseLeftX = this.topX + this.height;
-    this.noseLeftY = this.topY - this.noseExtension;
-    this.nosePeakX = this.noseLeftX + (this.noseExtension * 2);
-    this.nosePeakY = this.position.getY();
-    this.noseRightX = this.noseLeftX;
-    this.noseRightY = this.noseLeftY + this.width + (this.noseExtension * 2) ;
-    */
 
     this.noseCenterX = this.topX + this.height;
     this.noseCenterY = this.topY + (this.width / 2);
@@ -128,27 +122,41 @@ function Shuttle( ) {
     this.noseEndAngle = this.deg2rad(90); //in radians
     //ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
     this.ctx.ellipse(this.noseCenterX, this.noseCenterY, this.noseXRadius, this.noseYRadius, 0, this.noseStartAngle, this.noseEndAngle);
+    this.ctx.fillStyle = this.noseColor;
     this.ctx.fill();
     this.ctx.stroke();
-    //this.ctx.beginPath();
-    //this.ctx.moveTo(this.noseLeftX, this.noseLeftY);
-    //this.ctx.lineTo(this.nosePeakX, this.nosePeakY);
-    //this.ctx.lineTo(this.noseRightX, this.noseRightY);
-    //this.ctx.closePath();
-    //this.ctx.stroke();
+
+    //draw thruster cone
+    this.coneStartX = this.topX;
+    this.coneStartY = this.topY + (this.width / 2) - 2;
+    this.coneX1 = this.topX;
+    this.coneY1 = this.coneStartY + 4;
+    this.coneX2 = this.topX - 5;
+    this.coneY2 = this.coneY1 + 5;
+    this.coneX3 = this.coneX2;
+    this.coneY3 = this.coneY1 - (5 + 4);
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.coneStartX, this.coneStartY);
+    this.ctx.lineTo(this.coneX1, this.coneY1);
+    this.ctx.lineTo(this.coneX2, this.coneY2);
+    this.ctx.lineTo(this.coneX3, this.coneY3);
+    this.ctx.closePath();
+    this.ctx.fillStyle = this.coneColor;
+    this.ctx.fill();
+    this.ctx.stroke();
 
     //draw thruster
     if (this.drawThruster) {
       var thruster = {};
-      thruster.tailX = this.topX - this.thrusterLength;
+      thruster.tailX = this.coneX2 - this.thrusterLength;
       thruster.tailY = this.position.getY();
 
       thruster.topLeftX = this.topX - (this.thrusterLength *.75);
-      thruster.topLeftY = this.topY;
-      thruster.topRightX = this.topX;
-      thruster.topRightY = this.topY;
-      thruster.bottomRightX = thruster.topRightX;
-      thruster.bottomRightY = thruster.topRightY + this.width;
+      thruster.topLeftY = this.coneY3;
+      thruster.topRightX = this.coneX3;
+      thruster.topRightY = this.coneY3;
+      thruster.bottomRightX = this.coneX2;
+      thruster.bottomRightY = this.coneY2;
       thruster.bottomLeftX = thruster.topLeftX;
       thruster.bottomLeftY = thruster.bottomRightY;
 
@@ -159,6 +167,16 @@ function Shuttle( ) {
       this.ctx.lineTo(thruster.bottomRightX, thruster.bottomRightY);
       this.ctx.lineTo(thruster.bottomLeftX, thruster.bottomLeftY);
       this.ctx.closePath();
+
+      var gradientStartX = thruster.tailX;
+      var gradientStartY = thruster.topLeftY;
+      var gradientEndX = thruster.topRightX;
+      var gradientEndY = thruster.topLeftY;
+      var grd = this.ctx.createLinearGradient(gradientStartX, gradientStartY, gradientEndX,gradientEndY);
+      grd.addColorStop(0, this.thrusterColor1);
+      grd.addColorStop(1, this.thrusterColor2);
+      this.ctx.fillStyle = grd;
+      this.ctx.fill();
       this.ctx.stroke();
 
     }
